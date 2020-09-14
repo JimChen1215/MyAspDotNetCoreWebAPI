@@ -12,6 +12,7 @@ namespace WebAPIDemo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiKeyAuth]
     [Log]
     [ServiceFilter(typeof(AddHeaderResultServiceFilter))]
     [AddHeader("Author", "Jim Chen")]
