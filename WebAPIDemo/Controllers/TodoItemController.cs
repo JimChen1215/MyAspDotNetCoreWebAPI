@@ -10,9 +10,11 @@ using WebAPIDemo.Models;
 
 namespace WebAPIDemo.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
-    [ApiKeyAuth]
+    [Route("api/[controller]")]
+    //[Route("RouteTest")]
+    //[ApiKeyAuth]
     [Log]
     [ServiceFilter(typeof(AddHeaderResultServiceFilter))]
     [AddHeader("Author", "Jim Chen")]
@@ -35,19 +37,20 @@ namespace WebAPIDemo.Controllers
         }
 
         // GET: api/TodoItem/5
-        [HttpGet("{id}")]
+        [HttpGet("[action]/{id}", Name = "Item_List")]
         [AddHeader("Failing Controller",   "Won't appear when exception is handled")]
         public async Task<ActionResult<TodoItemDTO>> GetTodoItem(long id)
         {
-            throw new Exception("Testing custom exception filter.");
-            //var todoItem = await _context.TodoItems.FindAsync(id);
+            //To test exception
+            //throw new Exception("Testing custom exception filter.");
+            var todoItem = await _context.TodoItems.FindAsync(id);
 
-            //if (todoItem == null)
-            //{
-            //    return NotFound();
-            //}
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
 
-            //return ItemToDTO(todoItem);
+            return ItemToDTO(todoItem);
         }
 
         [HttpPut("{id}")]
