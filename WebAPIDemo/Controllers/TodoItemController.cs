@@ -100,6 +100,11 @@ namespace WebAPIDemo.Controllers
                 ItemToDTO(todoItem));
         }
 
+        /// <summary>
+        /// Deletes a specific TodoItem. Jim Chen
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoItem(long id)
         {
